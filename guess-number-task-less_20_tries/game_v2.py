@@ -4,6 +4,21 @@
 
 import numpy as np
 
+def wise_prediction(number:int = 1) -> int:
+    count = 0
+    min_range = 1
+    max_range = 100
+    
+    while True:
+        count += 1
+        predict_number = (max_range+min_range)//2
+        if predict_number > number:
+            max_range = predict_number - 1
+        elif predict_number < number:
+            min_range = predict_number + 1
+        else:
+            break
+    return count            
 
 def random_predict(number: int = 1) -> int:
     """Рандомно угадываем число
@@ -24,7 +39,7 @@ def random_predict(number: int = 1) -> int:
     return count
 
 
-def score_game(random_predict) -> int:
+def score_game() -> int:
     """За какое количство попыток в среднем за 1000 подходов угадывает наш алгоритм
 
     Args:
@@ -34,17 +49,18 @@ def score_game(random_predict) -> int:
         int: среднее количество попыток
     """
     count_ls = []
-    #np.random.seed(1)  # фиксируем сид для воспроизводимости
+    np.random.seed(20)  # фиксируем сид для воспроизводимости
     random_array = np.random.randint(1, 101, size=(1000))  # загадали список чисел
 
     for number in random_array:
-        count_ls.append(random_predict(number))
+        count_ls.append(wise_prediction(number))
 
     score = int(np.mean(count_ls))
     print(f"Ваш алгоритм угадывает число в среднем за:{score} попыток")
     return score
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # RUN
-    score_game(random_predict)
+
+score_game()
