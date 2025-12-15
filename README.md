@@ -3,4 +3,4 @@ SF practice code
 
 ## Projects
 
-* PY-8. Игра угадай число
+* [Project 0. Игра угадай число]()
